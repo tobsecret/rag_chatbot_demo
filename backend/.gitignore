@@ -1,4 +1,5 @@
 __pycache__
 .venv
 beakr.duckdb
+chroma_data
 .pytest_cache
