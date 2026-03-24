@@ -1,0 +1,10 @@
+__pycache__
+.venv
+.pytest_cache
+*.duckdb
+*.db
+.env
+chroma_data/
+tests/data/
+docker_build.sh
+docker_start.sh

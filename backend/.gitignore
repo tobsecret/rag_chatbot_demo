@@ -1,0 +1,4 @@
+__pycache__
+.venv
+beakr.duckdb
+.pytest_cache
