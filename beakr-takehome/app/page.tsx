@@ -12,6 +12,9 @@ type EnrolledDocument = {
   filename: string;
   file_hash: string;
   file_type: string;
+  version: number;
+  first_seen?: string;
+  last_seen?: string;
 };
 
 export default function Home() {
@@ -238,8 +241,16 @@ export default function Home() {
                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
                        </div>
                        <div className="flex flex-col overflow-hidden w-full">
-                         <span className="font-semibold text-zinc-700 dark:text-zinc-200 truncate text-[13px]">{doc.filename}</span>
-                         <span className="text-[10px] text-zinc-400 font-mono mt-0.5 max-w-full truncate">{doc.file_hash}</span>
+                         <div className="flex items-center justify-between">
+                           <span className="font-semibold text-zinc-700 dark:text-zinc-200 truncate text-[13px]">{doc.filename}</span>
+                           <span className="text-[10px] bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded-full font-bold ml-2">v{doc.version}</span>
+                         </div>
+                         <div className="flex flex-col gap-0.5 mt-1">
+                            <span className="text-[9px] text-zinc-400 font-mono truncate">ID: {doc.file_hash.substring(0, 12)}...</span>
+                            {doc.last_seen && (
+                              <span className="text-[9px] text-zinc-500 italic">Updated: {new Date(doc.last_seen).toLocaleString()}</span>
+                            )}
+                         </div>
                        </div>
                      </li>
                   ))}

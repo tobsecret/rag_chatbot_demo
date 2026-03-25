@@ -64,7 +64,10 @@ async def list_documents():
                 unique_docs[f_hash] = {
                     "filename": f_name,
                     "file_hash": f_hash,
-                    "file_type": m.get("file_type", "")
+                    "file_type": m.get("file_type", ""),
+                    "version": m.get("version", 1),
+                    "first_seen": m.get("first_seen"),
+                    "last_seen": m.get("last_seen")
                 }
                 
         return {"documents": list(unique_docs.values())}

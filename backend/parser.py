@@ -129,11 +129,15 @@ def extract_chunks(parsed_doc: ParsedDocument) -> list[dict]:
                         chunk_text = item.export_to_markdown()
                     break
                     
+        # Generate a unique hash for the chunk text for granular deduplication
+        chunk_hash = hashlib.sha256(chunk_text.encode()).hexdigest()
+                    
         # Extract meaningful RAG details to store in our database/vector store.
         structured_chunks.append({
             "chunk_id": i,
             "chunk_type": chunk_type,
             "text": chunk_text,
+            "chunk_hash": chunk_hash,
             "headings": getattr(c.meta, "headings", []),
             "source_filename": parsed_doc.metadata["artifact"]["filename"],
             "file_hash": parsed_doc.metadata["artifact"]["file_hash"]
